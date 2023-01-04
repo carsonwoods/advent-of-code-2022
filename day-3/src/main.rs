@@ -2,7 +2,6 @@
 // Written by Carson Woods
 
 fn main() {
-
     let mut priorities = std::collections::HashMap::new();
     let mut priority_value = 1;
 
@@ -22,9 +21,6 @@ fn main() {
 
     part_a(&priorities);
     part_b(&priorities)
-
-
-
 }
 
 fn part_a(priorities: &std::collections::HashMap<char, u32>) {
@@ -51,7 +47,7 @@ fn part_a(priorities: &std::collections::HashMap<char, u32>) {
         let compartments: Vec<char> = rucksack.chars().collect();
 
         // slice the vector into chunks of len/2 size
-        let mut slice_iter = compartments.chunks(rucksack_len/2);
+        let mut slice_iter = compartments.chunks(rucksack_len / 2);
 
         // get the two slices as the respective compartments
         let compartment_one = slice_iter.next().unwrap();
