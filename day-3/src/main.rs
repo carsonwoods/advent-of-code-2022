@@ -9,14 +9,14 @@ fn main() {
     // entire lowercase alphabet
     for c in b'a'..=b'z' {
         priorities.insert(c as char, priority_value);
-        priority_value = priority_value + 1;
+        priority_value += 1;
     }
 
     // iterate through ascii values of chars to iterate through
     // entire uppercase alphabet
     for c in b'A'..=b'Z' {
         priorities.insert(c as char, priority_value);
-        priority_value = priority_value + 1;
+        priority_value += 1;
     }
 
     part_a(&priorities);
@@ -31,7 +31,7 @@ fn part_a(priorities: &std::collections::HashMap<char, u32>) {
     let contents = std::fs::read_to_string("input.txt").expect("Error: could not read input file");
 
     // splits input into vector of lines
-    let rucksacks: Vec<&str> = contents.trim().split("\n").collect();
+    let rucksacks: Vec<&str> = contents.trim().split('\n').collect();
 
     for rucksack in rucksacks.into_iter() {
         // skip trailing new line that my editor appends to files
@@ -58,7 +58,7 @@ fn part_a(priorities: &std::collections::HashMap<char, u32>) {
 
         // for each item in compartment one
         // adds that item to list to sum if found in compartment 2
-        for c in compartment_one.into_iter() {
+        for c in compartment_one.iter() {
             if compartment_two.contains(c) {
                 items_in_both.push(*c);
             }
@@ -70,8 +70,8 @@ fn part_a(priorities: &std::collections::HashMap<char, u32>) {
         items_in_both.dedup();
 
         // finds total of priorities of items in both compartments
-        for c in items_in_both.into_iter() {
-            priorities_total = priorities_total + priorities.get(&c).unwrap();
+        for c in items_in_both.iter() {
+            priorities_total += priorities.get(c).unwrap();
         }
     }
 
@@ -86,7 +86,7 @@ fn part_b(priorities: &std::collections::HashMap<char, u32>) {
     let contents = std::fs::read_to_string("input.txt").expect("Error: could not read input file");
 
     // splits input into vector of lines
-    let rucksacks: Vec<&str> = contents.trim().split("\n").collect();
+    let rucksacks: Vec<&str> = contents.trim().split('\n').collect();
 
     // iterate through groups
     for slice in rucksacks.chunks(3) {
@@ -95,7 +95,7 @@ fn part_b(priorities: &std::collections::HashMap<char, u32>) {
             // check if badge candidate is found in other elves rucksacks
             if slice[1].contains(c) && slice[2].contains(c) {
                 // badge found, add total to value
-                priorities_total = priorities_total + priorities.get(&c).unwrap();
+                priorities_total += priorities.get(&c).unwrap();
                 // badge found, no need to continue searching
                 break;
             }
